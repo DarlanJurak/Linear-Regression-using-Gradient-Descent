@@ -2,6 +2,12 @@
 
 Currently in development!
 
+How to execute:
+
+1 - $> make
+
+2 - $> ./bin/regression_using_gradient_descent.exe
+
 Prospected main versions:
 
 v1.0 - Univariated Linear Regression

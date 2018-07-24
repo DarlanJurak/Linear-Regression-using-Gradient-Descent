@@ -31,13 +31,14 @@ int main () {
     string user_input;                  // Variable to interact with user.
     double learning_rate;
 
-    vector<double>       instance_input_double;  // Intermediary attributes vector.
-    vector<std::string> instance_input_string; // Used in the get line split.
-    vector<Sample *>      samples;
+    vector<double>          instance_input_double;  // Intermediary attributes vector.
+    vector<std::string>     instance_input_string; // Used in the get line split.
+    vector<Sample *>        samples;
+    vector<double>          tests;
 
-    int interations;
+    int num_iterations;
 
-    // Receive arguments (initial thetas, learning rate, training set and #iterations)
+    // Receive arguments (initial thetas, learning rate, training set and #num_iterations)
     cout << "\n=================== Initial Thetas Insertion ===================" << endl;
 
     // Theta 0
@@ -123,10 +124,49 @@ int main () {
     // Learning Rate
     cout << "How many interaction of the gradient descent do you want to run? " << endl;
     getline(cin, user_input);
-    interations = stoi(user_input);
+    num_iterations = stoi(user_input);
 
     // Execute Gradient Descent
+
+    for (int i = 0; i < num_iterations; i++)
+    {
+        double theta0_sum, theta1_sum, theta0_temp, theta1_temp, error_sum;
+        for (std::vector<Sample *>::iterator it = samples.begin(); it != samples.end(); ++it){
+
+            theta0_sum = thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
+            theta1_sum = (thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x)*(*it)->x;
+
+            error_sum = thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
+
+        }
+
+        theta0_temp = thetas.at(0) - learning_rate*theta0_sum/(samples.size());
+        theta1_temp = thetas.at(1) - learning_rate*theta1_sum/(samples.size());
+
+        thetas.at(0) = theta0_temp;
+        thetas.at(1) = theta1_temp;
+
+
+        // Shows inserted values
+        cout    << "\nUpdated values:\n"
+            << "Theta 0: "          << thetas.at(0) << "\n"
+            << "Theta 1: "          << thetas.at(1) << "\n"
+            << "Error Sum:"         << error_sum
+            << endl;
+
+    }
+
     // Output generated thetas
+
+    cout << "\n=================== Updated Thetas ===================" << endl;
+
+    // Shows inserted values
+    cout    << "Updated values:\n"
+            << "Theta 0: "          << thetas.at(0) << "\n"
+            << "Theta 1: "          << thetas.at(1) << "\n"
+            << endl;
+
     // Predict new received values
+
     return 0;
 }
