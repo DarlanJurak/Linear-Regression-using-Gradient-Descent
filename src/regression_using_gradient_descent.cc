@@ -130,13 +130,16 @@ int main () {
 
     for (int i = 0; i < num_iterations; i++)
     {
-        double theta0_sum, theta1_sum, theta0_temp, theta1_temp, error_sum;
+        double theta0_sum = 0, theta1_sum = 0, theta0_temp, theta1_temp, error_sum = 0;
+        theta0_sum = 0;
+        theta1_sum = 0;
+        error_sum = 0;
         for (std::vector<Sample *>::iterator it = samples.begin(); it != samples.end(); ++it){
 
-            theta0_sum = thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
-            theta1_sum = (thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x)*(*it)->x;
+            theta0_sum += thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
+            theta1_sum += (thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x)*(*it)->x;
 
-            error_sum = thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
+            error_sum += thetas.at(0) + thetas.at(1)*(*it)->x - (*it)->f_x;
 
         }
 
